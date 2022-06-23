@@ -1,6 +1,8 @@
-const axios = require("axios")
+require("dotenv").config()
 
-const apiKey = require("../utils/config")
+const apiKey = process.env.apiKey
+
+const axios = require("axios")
 const newsRouter = require("express").Router()
 
 newsRouter.get("/all",async(req,res)=>{
