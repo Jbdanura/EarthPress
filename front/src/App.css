@@ -30,7 +30,6 @@ body{
     grid-template-columns: 1fr 1fr;
     width: 90vw;
     margin: 0 auto;
-    overflow-y:scroll;
     margin-top: 70px;
 }
 .footer{
@@ -45,7 +44,6 @@ body{
 .links{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
 
 .logo{
     font-size:35px;
