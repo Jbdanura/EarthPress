@@ -1,58 +1,41 @@
 import './App.css';
-import {useState,useEffect} from "react"
-import axios from "axios"
-import {BrowserRouter as Router, Route, Link, Routes} from "react-router-dom"
-import Home from "./components/Home"
-import Category from './components/Category';
+import {useState} from "react"
+import {BrowserRouter as HashRouter, Route, Link, Routes} from "react-router-dom"
+import Articles from './components/Articles';
 
 function App() {
-  const [news,setNews] = useState([])
-  const [navMobile, setNavMobile] = useState(false)
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
-  useEffect(()=>{
-    const changeWidth = () => {
-      setScreenWidth(window.innerWidth);
-    }
-
-    window.addEventListener('resize', changeWidth)
-
-    const promise = axios.get("http://localhost:3001/news/all")
-    promise.then(response => {
-      setNews(response.data) 
-    })
-  },[])
-
-  const navMobileStyle =  {
-    display: "block",
-    marginLeft: "40px",
-    marginTop: "20px"
-  }
+  const [menuMobile,setMenuMobile] = useState(false)
 
   return (
     <div className="App">
-      <Router>
+      <HashRouter>
         <div className="nav">
-          <a href="/" className="logo">
-            <span style={{color:"lightblue"}}>Arg</span><span>e</span><span style={{color:"lightyellow"}}>nti</span>
-            <span>c</span><span style={{color:"lightblue"}}>ias</span>
+          <a href="/" className={"logo"}>
+            <span style={{color:"lightblue"}}>Arg</span><span style={{color:"white"}}>e</span><span style={{color:"lightyellow"}}>nti</span>
+            <span style={{color:"white"}}>c</span><span style={{color:"lightblue"}}>ias</span>
           </a>
-          <div className="links" style={screenWidth > 850 ? {display:"flex"} : !navMobile ? {display: "none"} : navMobileStyle}>
-            <Link to="/" className={navMobile ? "link-mobile": null}>General</Link> 
-            <Link to="/business" className={navMobile ? "link-mobile": null}>Economia</Link>
-            <Link to="/entertainment" className={navMobile ? "link-mobile": null} >Entretenimiento</Link>
-            <Link to="/health" className={navMobile ? "link-mobile": null}>Salud</Link>
-            <Link to="/science" className={navMobile ? "link-mobile": null}>Ciencia</Link>
-            <Link to="/sports" className={navMobile ? "link-mobile": null}>Deportes</Link>
-            <Link to="/technology" className={navMobile ? "link-mobile": null}>Tecnologia</Link>
+          <div className="open-menu" onClick={()=>setMenuMobile(!menuMobile)}>
+            <div className="hamburger-line"></div>
+            <div className="hamburger-line"></div>
+            <div className="hamburger-line"></div>
           </div>
-        <a onClick={()=>setNavMobile(!navMobile)} className="menu" style={screenWidth > 850 ? {display:"none"} :{display:"block"}}>☰</a>
+          <div className={!menuMobile?"links":"links-mobile"} onClick={()=>setMenuMobile(false)}>
+            <Link to="/" >General</Link> 
+            <Link to="/business" >Economia</Link>
+            <Link to="/entertainment" >Entretenimiento</Link>
+            <Link to="/health" >Salud</Link>
+            <Link to="/science" >Ciencia</Link>
+            <Link to="/sports" >Deportes</Link>
+            <Link to="/technology" >Tecnologia</Link>
+          </div>
         </div>
         <Routes>
-          <Route path="/" element={<Home articles={news}/>}/>
-          <Route path="/:category" element={<Category/>}/>
+          <Route path="/" element={<Articles/>}/>
+          <Route path="/:category" element={<Articles/>}/>
         </Routes>
-      </Router>
+      </HashRouter>
+      
     </div>
   );
 }
