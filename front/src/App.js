@@ -12,8 +12,7 @@ function App() {
       <HashRouter>
         <div className="nav">
           <a href="/" className={"logo"}>
-            <span style={{color:"lightblue"}}>Arg</span><span style={{color:"white"}}>e</span><span style={{color:"lightyellow"}}>nti</span>
-            <span style={{color:"white"}}>c</span><span style={{color:"lightblue"}}>ias</span>
+            <span style={{color:"lightblue"}}>Earth</span><span style={{color:"white"}}>Press</span>
           </a>
           <div className="open-menu" onClick={()=>setMenuMobile(!menuMobile)}>
             <div className="hamburger-line"></div>
@@ -22,12 +21,12 @@ function App() {
           </div>
           <div className={!menuMobile?"links":"links-mobile"} onClick={()=>setMenuMobile(false)}>
             <Link to="/" >General</Link> 
-            <Link to="/business" >Economia</Link>
-            <Link to="/entertainment" >Entretenimiento</Link>
-            <Link to="/health" >Salud</Link>
-            <Link to="/science" >Ciencia</Link>
-            <Link to="/sports" >Deportes</Link>
-            <Link to="/technology" >Tecnologia</Link>
+            <Link to="/business" >Economy</Link>
+            <Link to="/entertainment" >Entertainment</Link>
+            <Link to="/health" >Health</Link>
+            <Link to="/science" >Science</Link>
+            <Link to="/sports" >Sports</Link>
+            <Link to="/technology" >Technology</Link>
           </div>
         </div>
         <Routes>

@@ -10,30 +10,33 @@ const Articles = () => {
     const category = useParams().category
     useEffect(()=>{
         if(!category){
-            axios.get("https://helpful-blue-singlet.cyclic.app/news/all")
+            axios.get("http://localhost:3001/news/all")
             .then(response =>{
                 setArticles(response.data)
                 if(response.data.length > 0) setLoading(false)
             })
         } else {
-            axios.get(`https://helpful-blue-singlet.cyclic.app/news/${category}`)
+            axios.get(`http://localhost:3001/news/${category}`)
             .then(response =>{
                 setArticles(response.data)
+                
                 if(response.data.length > 0) setLoading(false)
             })
         }
+        
         return ()=>{
             setArticles([])
             setLoading(true)
         }
     },[category])
 
-
-    return(<>
+    console.log(articles)
+    return(
+    <>
         {loading ? <div className="loader-container"><SyncLoader size={30} color={"#3693d6"}/></div>: 
         <div className="articles">
             {articles.map(article=>{
-                if(article.description){
+                if(article.urlToImage && article.description && article.title){
                     return <Article key={article.title} article={article}/>
                 }
             })}
