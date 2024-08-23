@@ -10,13 +10,13 @@ const Articles = () => {
     const category = useParams().category
     useEffect(()=>{
         if(!category){
-            axios.get("https://fakeverse.onrender.com/posts_all/")
+            axios.get("https://fakeverse.onrender.com/news_all/")
             .then(response =>{
                 setArticles(response.data)
                 if(response.data.length > 0) setLoading(false)
             })
         } else {
-            axios.get(`https://fakeverse.onrender.com/posts_${category}/`)
+            axios.get(`https://fakeverse.onrender.com/news_${category}/`)
             .then(response =>{
                 setArticles(response.data)
                 
